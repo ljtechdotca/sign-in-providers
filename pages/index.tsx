@@ -9,6 +9,7 @@ const {
 const Home: NextPage = () => {
   const { user, logout, loginWithRedirect, isAuthenticated, isLoading } =
     useAuth0();
+
   return (
     <div>
       {isLoading ? (
@@ -16,9 +17,9 @@ const Home: NextPage = () => {
       ) : (
         <div>
           {isAuthenticated ? (
-            <button onClick={() => logout()}>Sign Out</button>
+            <button onClick={() => logout({ returnTo: url })}>Sign Out</button>
           ) : (
-            <button onClick={() => loginWithRedirect({ returnTo: url })}>
+            <button onClick={() => loginWithRedirect()}>
               Sign In
             </button>
           )}
