@@ -1,5 +1,10 @@
 import { useAuth0 } from "@auth0/auth0-react";
 import type { NextPage } from "next";
+import getConfig from "next/config";
+
+const {
+  publicRuntimeConfig: { url },
+} = getConfig();
 
 const Home: NextPage = () => {
   const { user, logout, loginWithRedirect, isAuthenticated, isLoading } =
@@ -13,7 +18,9 @@ const Home: NextPage = () => {
           {isAuthenticated ? (
             <button onClick={() => logout()}>Sign Out</button>
           ) : (
-            <button onClick={() => loginWithRedirect()}>Sign In</button>
+            <button onClick={() => loginWithRedirect({ returnTo: url })}>
+              Sign In
+            </button>
           )}
         </div>
       )}
