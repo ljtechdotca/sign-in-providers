@@ -7,7 +7,7 @@ function MyApp({ Component, pageProps }: AppProps) {
     <Auth0Provider
       domain="dev-l-l2xrbs.us.auth0.com"
       clientId="dh3VzgHVOqYALi1os1FZBqkzOCn3s5Fl"
-      redirectUri="http://localhost:3000"
+      redirectUri="https://ljtech-sign-in-providers.vercel.app"
     >
       <Component {...pageProps} />
     </Auth0Provider>
