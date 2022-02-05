@@ -1,6 +1,7 @@
 import { PrismaAdapter } from "@next-auth/prisma-adapter";
 import { PrismaClient } from "@prisma/client";
 import NextAuth from "next-auth";
+import { Adapter } from "next-auth/adapters";
 import GoogleProvider from "next-auth/providers/google";
 
 const prisma = new PrismaClient();
@@ -8,8 +9,7 @@ const prisma = new PrismaClient();
 const adapter = {
   ...PrismaAdapter(prisma),
   linkAccount: ({ ...data }) => prisma.account.create({ data }),
-  createUser: ({ ...data }) => prisma.user.create({ data }),
-};
+} as Adapter;
 
 const google = {
   clientId: process.env.GOOGLE_ID ?? "",
