@@ -5,7 +5,11 @@ import GoogleProvider from "next-auth/providers/google";
 
 const prisma = new PrismaClient();
 
-// await prisma.connect()
+const adapter = {
+  ...PrismaAdapter(prisma),
+  linkAccount: ({ ...data }) => prisma.account.create({ data }),
+  createUser: ({ ...data }) => prisma.user.create({ data }),
+};
 
 const google = {
   clientId: process.env.GOOGLE_ID ?? "",
@@ -13,7 +17,7 @@ const google = {
 };
 
 export default NextAuth({
-  adapter: PrismaAdapter(prisma),
+  adapter: adapter,
   providers: [
     // OAuth authentication providers...
     GoogleProvider({
